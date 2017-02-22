@@ -5,7 +5,7 @@ public class Temp {
     public static void main(String[] args) throws FileNotFoundException {
     	int counter=0;
     	Scanner input = new Scanner(new File("./data/weather.txt"));
-    	for()
+    	while(true){
     		double d = input.nextDouble();
     		System.out.println(d);
     		if(counter==7){
