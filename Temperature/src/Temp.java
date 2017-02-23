@@ -3,15 +3,13 @@ import java.util.*;   // for Scanner
 
 public class Temp {
     public static void main(String[] args) throws FileNotFoundException {
-    	int counter=0;
     	Scanner input = new Scanner(new File("./data/weather.txt"));
-    	for()
-    		double d = input.nextDouble();
-    		System.out.println(d);
-    		if(counter==7){
-    			break;
-    		}
-    		counter++;
+    	double[] doub=new double[8];
+    	for(int i=0;i<8;i++){
+    		doub[i]= input.nextDouble();
+    	}
+    	for(int i=0;i<7;i++){
+    		System.out.println(doub[i]+" to "+ doub[i+1]+". Change="+(doub[i]-doub[i+1]));
     	}
         
     }
