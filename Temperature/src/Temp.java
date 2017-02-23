@@ -1,3 +1,5 @@
+//Ryan Wong
+//2/23/17
 import java.io.*;     // for File
 import java.util.*;   // for Scanner
 
@@ -9,7 +11,13 @@ public class Temp {
     		doub[i]= input.nextDouble();
     	}
     	for(int i=0;i<7;i++){
-    		System.out.println(doub[i]+" to "+ doub[i+1]+". Change="+(doub[i]-doub[i+1]));
+    		double diff=doub[i]-doub[i+1];
+    		diff*=100;
+    		diff=(int)diff;
+    		diff=(double)diff;
+    		diff/=100;
+    		
+    		System.out.println(doub[i]+" to "+ doub[i+1]+". Change="+diff);
     	}
         
     }
