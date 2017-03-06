@@ -40,4 +40,6 @@
 		<item value="true" key="ShowStatusLine"/>
 		<item value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#x0D;&#x0A;&lt;History/&gt;" key="History"/>
 	</section>
+	<section name="JavaElementSearchActions">
+	</section>
 </section>
