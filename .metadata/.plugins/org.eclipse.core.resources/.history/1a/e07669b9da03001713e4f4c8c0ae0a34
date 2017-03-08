@@ -1,0 +1,16 @@
+package textExcel;
+
+public abstract class EmptyCell implements Cell {
+	//initial cell with no data
+	String contents = "";
+	
+	//sets the original contents to empty
+	public EmptyCell() {
+		contents = "<empty>";
+	}
+	
+	//returns a string with nothing in it
+	public String toString(Spreadsheet ss){
+		return(contents);
+	}
+}
