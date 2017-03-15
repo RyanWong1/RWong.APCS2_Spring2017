@@ -22,40 +22,43 @@ public class Spreadsheet implements Grid
 	@Override
 	public String processCommand(String command)
 	{
-		
-		String[] breakcommand = command.split(" ");
-		breakcommand[0] = breakcommand[0].toUpperCase();
+		String[] splitCommand = command.split(" ");
+		//in case of lower case
+		splitCommand[0] = splitCommand[0].toUpperCase();
+		//If length is 3 or less, that means it must want to inspectCell
 		if(command.length()==0){
 			return "";
-		} else if(breakcommand.length >= 3){
-			String userInput = breakcommand[2];
+		} else if(splitCommand.length >= 3){
+			String userInput = splitCommand[2];
 			int counter = 3;
-			while(counter < breakcommand.length){
-				userInput += " " + breakcommand[counter];
+			while(counter < splitCommand.length){
+				//adds the space that was taken out and the next part of the value
+				userInput += " " + splitCommand[counter];
 				counter++;
 			}
-			String cell = breakcommand[0];
-			SpreadsheetLocation x = new SpreadsheetLocation(cell);
-			sheet[x.getRow()][x.getCol()] = new TextCell(userInput);
+			String cell = splitCommand[0];
+			cellAssignment(userInput, cell);
 			return getGridText();
+			//if its less than 3, it has to be cell inspection
 		}else if(command.length() < 3){
-			return cellInspection(breakcommand[0]);
-		} else if (breakcommand[0].contains("CLEAR")){
-			if(breakcommand.length == 1){
-				for(int i = 0; i < rows; i++){
-					for(int j = 0; j < columns; j++){
-						sheet[i][j] = new EmptyCell();
-					}
-				}
+			//make if statement to test the type of splitCommand[2]
+			if()
+			return cellInspection(splitCommand[0]);
+			//check if the user input has clear, has been changed to uppercase
+		} else if (splitCommand[0].contains("CLEAR")){
+			//if theres no spaces, then must be just clear so clear entire cell
+			if(splitCommand.length == 1){
+				 clearEntireCell();
 				 return getGridText();
+				 //if there is space, then must be clearing just one spot
 			} else{
-				sheet[breakcommand[1].getRow()][breakcommand[1].toUpperCase().getCol()] = new EmptyCell();
+				//in case the cell isnt uppercased
+				clearOneCell(splitCommand[1].toUpperCase());
 				return getGridText();
 			}
 		} 
 		return "";
 	}
-	
 
 	@Override
 	public int getRows()
@@ -74,13 +77,6 @@ public class Spreadsheet implements Grid
 	@Override
 	public Cell getCell(Location loc){
 		return sheet[loc.getRow()][loc.getCol()];
-	}
-	
-	public String cellInspection(String cell){
-		//makes new spreadsheetlocation object to get the rows and col
-		SpreadsheetLocation a = new SpreadsheetLocation(cell);
-		String result = sheet[a.getRow()][a.getCol()].fullCellText();
-		return result;
 	}
 
 	@Override

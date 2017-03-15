@@ -1,7 +1,7 @@
 package textExcel;
 import java.util.*;
 
-public class TextCell implements Cell {
+public abstract class TextCell implements Cell {
 	String contents;
 	
 	//sets original contents then the data to the cell

@@ -24,38 +24,46 @@ public class Spreadsheet implements Grid
 	{
 		
 		String[] breakcommand = command.split(" ");
+		//in case of lower case
 		breakcommand[0] = breakcommand[0].toUpperCase();
+		//If length is 3 or less, that means it must want to inspectCell
 		if(command.length()==0){
 			return "";
 		} else if(breakcommand.length >= 3){
 			String userInput = breakcommand[2];
 			int counter = 3;
 			while(counter < breakcommand.length){
-				userInput += " " + breakcommand[counter];
+				userInput += " " + breakcommand[counter];//adds the space that was taken out and the next part of the value
 				counter++;
 			}
 			String cell = breakcommand[0];
 			SpreadsheetLocation x = new SpreadsheetLocation(cell);
 			sheet[x.getRow()][x.getCol()] = new TextCell(userInput);
 			return getGridText();
+			//if its less than 3, it has to be cell inspection
 		}else if(command.length() < 3){
+			//make if statement to test the type of splitCommand[2]
+			if()
 			return cellInspection(breakcommand[0]);
+			//check if the user input has clear, has been changed to uppercase
 		} else if (breakcommand[0].contains("CLEAR")){
+			//if theres no spaces, then must be just clear so clear entire cell
 			if(breakcommand.length == 1){
-				for(int i = 0; i < rows; i++){
+				for(int i = 0; i < rows; i++){//clears entire cell
 					for(int j = 0; j < columns; j++){
 						sheet[i][j] = new EmptyCell();
 					}
 				}
 				 return getGridText();
+				 //if there is space, then must be clearing just one spot
 			} else{
-				sheet[breakcommand[1].getRow()][breakcommand[1].toUpperCase().getCol()] = new EmptyCell();
+				//in case the cell isnt uppercased
+				sheet[breakcommand[1].toUpperCase().getRow()][breakcommand[1].toUpperCase().getCol()] = new EmptyCell();
 				return getGridText();
 			}
 		} 
 		return "";
 	}
-	
 
 	@Override
 	public int getRows()

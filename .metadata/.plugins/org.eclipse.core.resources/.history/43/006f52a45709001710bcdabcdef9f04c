@@ -31,7 +31,7 @@ public class Spreadsheet implements Grid
 			String userInput = breakcommand[2];
 			int counter = 3;
 			while(counter < breakcommand.length){
-				userInput += " " + breakcommand[counter];
+				userInput += " " + breakcommand[counter];/
 				counter++;
 			}
 			String cell = breakcommand[0];
@@ -49,7 +49,7 @@ public class Spreadsheet implements Grid
 				}
 				 return getGridText();
 			} else{
-				sheet[breakcommand[1].getRow()][breakcommand[1].toUpperCase().getCol()] = new EmptyCell();
+				sheet[breakcommand[1].toUpperCase().getRow()][breakcommand[1].toUpperCase().getCol()] = new EmptyCell();
 				return getGridText();
 			}
 		} 

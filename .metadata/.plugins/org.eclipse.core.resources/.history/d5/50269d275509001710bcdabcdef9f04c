@@ -1,0 +1,44 @@
+package textExcel;
+import java.util.*;
+
+public abstract class TextCell implements Cell {
+	String contents;
+	
+	//sets original contents then the data to the cell
+	public TextCell(String temp) {
+		contents = temp;
+		temp = temp.substring(1, temp.length() - 1);
+		contents = temp;
+	}
+	public String abbreviatedCellText() {
+		//makes new String so this method won't affect FullCellText when you take out the quotes
+		String abbreviatedString = "";
+
+		//gets rid of quotes
+		if(contents.contains("\"") == true){
+			abbreviatedString = contents.substring(1, contents.length() - 1);
+		}
+		//Reduces string to first 10
+		if(abbreviatedString.length() > 10){
+			abbreviatedString = abbreviatedString.substring(0, 10);
+			return abbreviatedString;
+		}else{
+			//fills in the spaces so total length will be 10
+			while(abbreviatedString.length() != 10){
+				abbreviatedString += " ";
+
+			}
+			return abbreviatedString;
+		}
+	}
+	
+	public String toString(Spreadsheet ss){
+		return(contents);
+	}
+	public String fullCellText() {
+		return contents;
+	}
+	public void setText(String contents){
+		this.contents = contents;
+	}
+}
