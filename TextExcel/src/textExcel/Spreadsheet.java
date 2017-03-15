@@ -49,7 +49,7 @@ public class Spreadsheet implements Grid
 				}
 				 return getGridText();
 			} else{
-				sheet[breakcommand[1].getRow()][breakcommand[1].toUpperCase().getCol()] = new EmptyCell();
+				sheet[breakcommand[1].toUpperCase().getRow()][breakcommand[1].toUpperCase().getCol()] = new EmptyCell();
 				return getGridText();
 			}
 		} 
