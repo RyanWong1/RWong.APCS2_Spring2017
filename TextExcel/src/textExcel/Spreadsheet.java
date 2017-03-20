@@ -22,39 +22,49 @@ public class Spreadsheet implements Grid
 	@Override
 	public String processCommand(String command)
 	{
-		
-		String[] breakcommand = command.split(" ");
-		breakcommand[0] = breakcommand[0].toUpperCase();
-		if(command.length()==0){
-			return "";
-		} else if(breakcommand.length >= 3){
-			String userInput = breakcommand[2];
-			int counter = 3;
-			while(counter < breakcommand.length){
-				userInput += " " + breakcommand[counter];
-				counter++;
-			}
-			String cell = breakcommand[0];
-			SpreadsheetLocation x = new SpreadsheetLocation(cell);
-			sheet[x.getRow()][x.getCol()] = new TextCell(userInput);
-			return getGridText();
-		}else if(command.length() < 3){
-			return cellInspection(breakcommand[0]);
-		} else if (breakcommand[0].contains("CLEAR")){
-			if(breakcommand.length == 1){
-				for(int i = 0; i < rows; i++){
-					for(int j = 0; j < columns; j++){
-						sheet[i][j] = new EmptyCell();
-					}
-				}
-				 return getGridText();
+		String[] commandArray = command.split(" ");
+		if (commandArray[0].contains("clear")){
+			if(commandArray.length == 1){
+				clearEntireCell();
+				return getGridText();
 			} else{
-				sheet[breakcommand[1].toUpperCase().getRow()][breakcommand[1].toUpperCase().getCol()] = new EmptyCell();
+				clearOneCell(commandArray[1].toUpperCase());
 				return getGridText();
 			}
-		} 
+		}
+		if(commandArray.length==1){
+			String upCommand=commandArray[0].toUpperCase();
+			String [] array=splitCommand(upCommand);
+			char temp=array[0].charAt(0);
+			columns=(int)temp-(int)'A';
+			rows=Integer.parseInt(array[1])-1;
+			return getSheet()[rows][columns].fullCellText();
+		}else{		
+			commandArray[0] = commandArray[0].toUpperCase();
+			if(command.length()==0){
+				return "";
+			} else if(commandArray.length >= 3){
+				String userInput = commandArray[2];
+				int counter = 3;
+				while(counter < commandArray.length){
+					userInput += " " + commandArray[counter];
+					counter++;
+				}
+				String cell = commandArray[0];
+				cellAssignment(userInput, cell);
+				return getGridText();
+			}else if(command.length() < 3){
+				return cellInspection(commandArray[0]);
+			}
+		}
 		return "";
 	}
+
+	public String[] splitCommand(String command){
+    	
+    	return command.split("(?<=\\D)(?=\\d)|(?<=\\d)(?=\\D)");
+    }
+
 	
 
 	@Override
@@ -70,6 +80,12 @@ public class Spreadsheet implements Grid
 		// TODO Auto-generated method stub
 		return columns;
 	}
+	
+	public void cellAssignment(String input, String cell){
+		SpreadsheetLocation b = new SpreadsheetLocation(cell);
+		sheet[b.getRow()][b.getCol()] = new TextCell(input);
+	}
+	
 
 	@Override
 	public Cell getCell(Location loc){
@@ -77,10 +93,26 @@ public class Spreadsheet implements Grid
 	}
 	
 	public String cellInspection(String cell){
-		//makes new spreadsheetlocation object to get the rows and col
 		SpreadsheetLocation a = new SpreadsheetLocation(cell);
 		String result = sheet[a.getRow()][a.getCol()].fullCellText();
 		return result;
+	}
+	
+	public void clearOneCell(String cell){
+		SpreadsheetLocation userInput = new SpreadsheetLocation(cell);
+		sheet[userInput.getRow()][userInput.getCol()] = new EmptyCell();
+	}
+	
+	public void clearEntireCell(){
+		for(int i = 0; i < rows; i++){
+			for(int j = 0; j < columns; j++){
+				sheet[i][j] = new EmptyCell();
+			}
+		}
+	}
+	
+	public Cell[][] getSheet(){
+		return sheet;
 	}
 
 	@Override

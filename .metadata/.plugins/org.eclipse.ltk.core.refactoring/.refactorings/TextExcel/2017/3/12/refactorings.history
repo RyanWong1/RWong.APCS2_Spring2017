@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename local variable &apos;splitCommand&apos; in &apos;textExcel.Spreadsheet.processCommand(...)&apos; to &apos;commandArray&apos;&#x0D;&#x0A;- Original project: &apos;TextExcel&apos;&#x0D;&#x0A;- Original element: &apos;textExcel.Spreadsheet.processCommand(String).splitCommand&apos;&#x0D;&#x0A;- Renamed element: &apos;splitCommand&apos;&#x0D;&#x0A;- Update references to refactored element" description="Rename local variable &apos;splitCommand&apos;" id="org.eclipse.jdt.ui.rename.local.variable" input="/src&lt;textExcel{Spreadsheet.java[Spreadsheet~processCommand~QString;@splitCommand!527!569!536!547!\[QString;!0!false" name="commandArray" references="true" stamp="1489995046611" version="1.0"/>
+</session>
