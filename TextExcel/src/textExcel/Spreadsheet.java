@@ -9,6 +9,7 @@ public class Spreadsheet implements Grid
 	private char[] alphabet = new char[] { 'A', 'B', 'C', 'D', 'E', 'F', 'G' };
 	private Cell[][] sheet = new Cell[rows][columns];
 	private String name = "";
+	private String nullStr="          ";
 
 	public Spreadsheet() {
 		for(int i=0;i<rows;i++){
@@ -23,7 +24,7 @@ public class Spreadsheet implements Grid
 	public String processCommand(String command)
 	{
 		String[] commandArray = command.split(" ");
-		if (commandArray[0].contains("clear")){
+		if (commandArray[0].equalsIgnoreCase("clear")){
 			if(commandArray.length == 1){
 				clearEntireCell();
 				return getGridText();
@@ -119,6 +120,7 @@ public class Spreadsheet implements Grid
 	public String getGridText()
 	{
 		String grid = "   |";
+		String cellStr=null;
 		
 		//fills in the top row with the letters
 		for(int i = 0; i < columns; i++){
@@ -142,7 +144,12 @@ public class Spreadsheet implements Grid
 				//includes the dashed lines at the end, only lets first 10 characters show
 				//Puts the cell with its values in the grid
 				//i-1 because i started at 1 for numbering but arrays are zero based
-				grid += sheet[i-1][k].abbreviatedCellText() + "|";
+				if(sheet[i-1][k].abbreviatedCellText()==""){
+					cellStr=nullStr;
+				}else{
+					cellStr=sheet[i-1][k].abbreviatedCellText();
+				}
+				grid += cellStr + "|";
 			}
 		}
 		grid += "\n";// adds a new line after finishing creating the grid
