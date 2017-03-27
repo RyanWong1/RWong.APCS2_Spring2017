@@ -1,26 +1,37 @@
 package textExcel;
 
-public class RealCell implements Cell {
+public abstract class RealCell implements Cell {
 
-	private String str;
+	private String value;
 	
-	public RealCell(String str1){
-		str=str1;
+	public RealCell (String enteredVal){				//constructor that saves entered string to the string field
+		value = enteredVal;
 	}
 	@Override
-	public String abbreviatedCellText() {
-		// TODO Auto-generated method stub
-		return (str + "            ").substring(0, 10);
+	public String abbreviatedCellText() {				//basic method to take the string and turn it into the ten char String
+		String returnStr = getDoubleValue() + "";
+		if (returnStr.length() < 10){
+			while (returnStr.length() < 10){
+				returnStr += " ";
+			}
+			return returnStr;
+		} else if (returnStr.length() > 10){
+			returnStr = returnStr.substring(0, 10);
+			return returnStr;
+		}else{
+			return returnStr;
+		}
+
 	}
 
 	@Override
 	public String fullCellText() {
-		// TODO Auto-generated method stub
-		return str;
+		return value;								//acts as a getter and returns the string field
 	}
 	
-	public String getDoubleValue(){
-		
+	
+	public double getDoubleValue(){
+		return Double.parseDouble(value);			//returns cell type
 	}
 
 }
