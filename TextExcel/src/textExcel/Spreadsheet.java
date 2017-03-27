@@ -24,7 +24,6 @@ public class Spreadsheet implements Grid
 	public String processCommand(String command)
 	{
 		String[] commandArray = command.split(" ");
-		String[] array=splitCommand(command);
 		if (commandArray[0].equalsIgnoreCase("clear")){
 			if(commandArray.length == 1){
 				clearEntireCell();
@@ -36,12 +35,11 @@ public class Spreadsheet implements Grid
 		}
 		if(commandArray.length==1){
 			String upCommand=commandArray[0].toUpperCase();
+			String[] array=splitCommand(upCommand);
 			char temp=array[0].charAt(0);
 			columns=(int)temp-(int)'A';
 			rows=Integer.parseInt(array[1])-1;
 			return getSheet()[rows][columns].fullCellText();
-		}else if (array[array.length-1].equals("%")){
-			sheet[rows][columns]=new PercentCell();
 			
 		}else{
 			commandArray[0] = commandArray[0].toUpperCase();
