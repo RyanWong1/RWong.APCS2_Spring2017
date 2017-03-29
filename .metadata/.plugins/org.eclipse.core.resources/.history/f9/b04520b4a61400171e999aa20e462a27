@@ -28,8 +28,4 @@ public class FormulaCell extends RealCell{
 	public String getType(){
 		return "FormulaCell";						//returns type of cell
 	}
-	
-	public double getDoubleValue(){
-		return 0;
-	}
 }

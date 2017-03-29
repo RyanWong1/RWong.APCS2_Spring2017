@@ -56,3 +56,4 @@ java.io.FileNotFoundException: C:\Users\Ryan.Denny-HP\.tooling\gradle\versions.j
 	at org.eclipse.buildship.core.util.gradle.PublishedGradleVersionsWrapper$LoadVersionsJob.run(PublishedGradleVersionsWrapper.java:66) [org.eclipse.buildship.core_1.0.15.v20160425-1638.jar:na]
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55) [org.eclipse.core.jobs_3.8.0.v20160509-0411.jar:na]
 2017-03-27 09:04:06,922 [Worker-4] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2017-03-29 09:45:51,791 [Worker-1] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
