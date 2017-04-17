@@ -1,6 +1,9 @@
 package textExcel;
+import java.util.*;
 
 public class FormulaCell extends RealCell{
+	private String cText="";
+
 
 	@Override
 	public String abbreviatedCellText() {
@@ -22,14 +25,49 @@ public class FormulaCell extends RealCell{
 	}
 	
 	public FormulaCell (String enteredForm){
-		super(enteredForm);							//constructor to fill super's String field (accesses by fullCellText)
+		super(enteredForm);//constructor to fill super's String field (accesses by fullCellText)
+		cText = fullCellText().substring(2, fullCellText().length()-2);
 	}
 
 	public String getType(){
 		return "FormulaCell";						//returns type of cell
 	}
 	
-	public double getDoubleValue(){
-		return 0;
+	public double getDoubleValue (){
+		ArrayList<String> operators = new ArrayList<String>();
+		ArrayList<Double> operands = new ArrayList<Double>();
+		ArrayList<String> locations = new ArrayList<String>();
+		for (int i = 0; i < cText.length(); i++){
+			if ((cText.charAt(i) == '+' ||(cText.charAt(i) == '-' && cText.charAt(i+1) == ' ')||cText.charAt(i) == '*' ||cText.charAt(i) == '/')){
+				operators.add(cText.charAt(i) + "");
+			} 
+			else if (cText.charAt(i) == ' ');
+			else {
+				
+				String value = cText.substring(i);
+				if (value.indexOf(" ") == -1){
+				}else {
+					value = value.substring(0, value.indexOf(' '));
+					i = value.indexOf(' ');
+				}
+				operands.add(Double.parseDouble(value));
+			}
+		}
+		for (int i = 0; i < operands.size(); i++){
+			System.out.println(operands.get(i));
+		}
+		double returnVal = operands.get(0);
+		for (int i = 0; i < operators.size(); i++){
+			if (operators.get(i).equalsIgnoreCase("+")){
+				returnVal += operands.get(i+1);
+			} else if (operators.get(i).equalsIgnoreCase("-")){
+				returnVal -= operands.get(i+1);
+			} else if (operators.get(i).equalsIgnoreCase("*")){
+				returnVal *= operands.get(i+1);
+			} else if (operators.get(i).equalsIgnoreCase("/")){
+				returnVal /= operands.get(i+1);
+			}
+		}
+		return returnVal;
 	}
 }
