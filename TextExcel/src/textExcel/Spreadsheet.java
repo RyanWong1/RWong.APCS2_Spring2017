@@ -1,6 +1,9 @@
 package textExcel;
 
-// Update this file with your own code.
+//Ryan Wong
+//APCS 2
+//Text Excel
+//3/14/17
 
 public class Spreadsheet implements Grid
 {
@@ -20,7 +23,7 @@ public class Spreadsheet implements Grid
 	}
 	
 
-	@Override
+	//gets command and sets up each cell
 	public String processCommand(String command)
 	{
 		String[] commandArray = command.split(" ");
@@ -53,7 +56,11 @@ public class Spreadsheet implements Grid
 					counter++;
 				}
 				String cell = commandArray[0];
-				cellAssignment(userInput, cell);
+				String longStr = commandArray[2];
+				for (int i = 3; i < commandArray.length; i++) {
+					longStr += " " + commandArray[i];
+				}
+				cellAssignment(longStr, cell);
 				return getGridText();
 			}else if(command.length() < 3){
 				return cellInspection(commandArray[0]);
@@ -72,17 +79,18 @@ public class Spreadsheet implements Grid
 	@Override
 	public int getRows()
 	{
-		
+		//gets rows
 		return rows;
 	}
 
 	@Override
 	public int getCols()
 	{
-		// TODO Auto-generated method stub
+		// gets the columns
 		return columns;
 	}
 	
+	//assigning each cell to each type according to the command
 	public void cellAssignment(String input, String cell){
 		SpreadsheetLocation b = new SpreadsheetLocation(cell);
 		if(input.contains("\"")){
@@ -90,7 +98,7 @@ public class Spreadsheet implements Grid
 		}else if(input.contains("%")){
 			sheet[b.getRow()][b.getCol()] = new PercentCell(input);
 		}else if(input.contains("(") && input.contains(")")){
-			sheet[b.getRow()][b.getCol()] = new FormulaCell(input);
+			sheet[b.getRow()][b.getCol()] = new FormulaCell(input, this);
 		}else{
 			sheet[b.getRow()][b.getCol()] = new ValueCell(input);
 		}
@@ -100,6 +108,11 @@ public class Spreadsheet implements Grid
 	@Override
 	public Cell getCell(Location loc){
 		return sheet[loc.getRow()][loc.getCol()];
+	}
+	
+	public SpreadsheetLocation getLoc(String command) {
+		SpreadsheetLocation loc = new SpreadsheetLocation(command);
+		return loc;
 	}
 	
 	public String cellInspection(String cell){
